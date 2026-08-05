@@ -1,0 +1,10 @@
+# Generated at runtime - not part of the source tree
+reports/*
+logs/*
+!reports/.gitkeep
+!logs/.gitkeep
+
+# Editor/OS cruft
+*.swp
+.DS_Store
+Thumbs.db
