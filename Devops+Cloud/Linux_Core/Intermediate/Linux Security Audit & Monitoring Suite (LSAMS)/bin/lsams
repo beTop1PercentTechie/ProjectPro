@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# bin/lsams - Thin, relocatable wrapper so LSAMS can be symlinked onto PATH
+# (e.g. /usr/local/bin/lsams) while the real project lives anywhere else.
+
+set -euo pipefail
+
+_resolve_self() {
+    local src="${BASH_SOURCE[0]}"
+    while [[ -h "$src" ]]; do
+        local dir
+        dir="$(cd -P "$(dirname "$src")" >/dev/null 2>&1 && pwd)"
+        src="$(readlink "$src")"
+        [[ "$src" != /* ]] && src="$dir/$src"
+    done
+    echo "$src"
+}
+
+BIN_PATH="$(_resolve_self)"
+PROJECT_ROOT="$(cd -P "$(dirname "$BIN_PATH")/.." >/dev/null 2>&1 && pwd)"
+
+exec "$PROJECT_ROOT/lsams.sh" "$@"
