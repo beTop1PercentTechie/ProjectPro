@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSL Renewal Failed</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff4f3;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202124;
+}
+
+.container {
+    max-width: 680px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #efc9c5;
+}
+
+.header {
+    background: #8f1d1d;
+    color: #ffffff;
+    padding: 28px 34px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.content {
+    padding: 40px 34px;
+}
+
+.failure {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #ffe4e1;
+    color: #a61b1b;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.title {
+    font-size: 30px;
+    margin: 22px 0 12px;
+}
+
+.description {
+    color: #667085;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.alert-box {
+    margin-top: 28px;
+    padding: 24px;
+    background: #fff0ef;
+    border-left: 5px solid #c62828;
+    border-radius: 10px;
+}
+
+.card {
+    margin-top: 26px;
+    border: 1px solid #eeeeee;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.row {
+    display: flex;
+    padding: 17px 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    width: 40%;
+    color: #667085;
+}
+
+.value {
+    width: 60%;
+    font-weight: 600;
+}
+
+.footer {
+    padding: 22px 34px;
+    background: #fafafa;
+    color: #777777;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">SSL Certificate Monitor</div>
+    </div>
+
+    <div class="content">
+
+        <span class="failure">
+            ● RENEWAL FAILED
+        </span>
+
+        <h1 class="title">
+            Certificate renewal requires attention.
+        </h1>
+
+        <p class="description">
+            The automated renewal workflow for
+            <strong>{{DOMAIN}}</strong>
+            did not complete successfully.
+        </p>
+
+        <div class="alert-box">
+
+            <strong>URGENT ACTION REQUIRED</strong>
+
+            <p>
+                Check the Certbot logs, Nginx configuration,
+                DNS configuration, and certificate status.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <div class="row">
+                <div class="label">Domain</div>
+                <div class="value">{{DOMAIN}}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Current Status</div>
+                <div class="value">{{STATUS}}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Expiry Date</div>
+                <div class="value">{{EXPIRY_DATE}}</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        URGENT automated SSL certificate notification.
+    </div>
+
+</div>
+
+</body>
+</html>
