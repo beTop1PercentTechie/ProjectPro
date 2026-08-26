@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSL Certificate Healthy</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #f4f7f6;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #18212f;
+}
+
+.container {
+    max-width: 680px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #e4e9e7;
+}
+
+.header {
+    padding: 28px 34px;
+    background: #18212f;
+    color: #ffffff;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.content {
+    padding: 40px 34px;
+}
+
+.status {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #e8f7ef;
+    color: #12804a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.title {
+    font-size: 30px;
+    margin: 22px 0 12px;
+}
+
+.description {
+    color: #667085;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.card {
+    margin-top: 28px;
+    border: 1px solid #e6ebe8;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.row {
+    display: flex;
+    padding: 17px 20px;
+    border-bottom: 1px solid #edf0ef;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    width: 40%;
+    color: #667085;
+    font-size: 14px;
+}
+
+.value {
+    width: 60%;
+    font-weight: 600;
+}
+
+.good {
+    color: #12804a;
+}
+
+.footer {
+    padding: 22px 34px;
+    background: #f8faf9;
+    color: #7a8491;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">SSL Certificate Monitor</div>
+    </div>
+
+    <div class="content">
+
+        <span class="status">
+            ● CERTIFICATE HEALTHY
+        </span>
+
+        <h1 class="title">
+            Your certificate is healthy.
+        </h1>
+
+        <p class="description">
+            The HTTPS certificate for
+            <strong>{{DOMAIN}}</strong>
+            is valid and does not currently require renewal.
+        </p>
+
+        <div class="card">
+
+            <div class="row">
+                <div class="label">Domain</div>
+                <div class="value">{{DOMAIN}}</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Status</div>
+                <div class="value good">HEALTHY</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Days Remaining</div>
+                <div class="value">{{REMAINING_DAYS}} days</div>
+            </div>
+
+            <div class="row">
+                <div class="label">Expiry Date</div>
+                <div class="value">{{EXPIRY_DATE}}</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Automated notification from SSL Certificate Monitor.
+    </div>
+
+</div>
+
+</body>
+</html>
