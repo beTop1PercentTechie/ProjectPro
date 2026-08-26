@@ -1,0 +1,290 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# ==========================================
+# SSL CERTIFICATE MONITOR
+# ==========================================
+
+CONFIG_FILE="/home/ubuntu/ssl-monitor/config/ssl-monitor.conf"
+
+# ------------------------------------------
+# Load configuration
+# ------------------------------------------
+
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "ERROR: Configuration file not found:"
+    echo "$CONFIG_FILE"
+    exit 1
+fi
+
+source "$CONFIG_FILE"
+
+# ------------------------------------------
+# Validate required configuration
+# ------------------------------------------
+
+if [[ -z "${DOMAIN:-}" ]]; then
+    echo "ERROR: DOMAIN is not configured."
+    exit 1
+fi
+
+if [[ -z "${CERTIFICATE:-}" ]]; then
+    echo "ERROR: CERTIFICATE is not configured."
+    exit 1
+fi
+
+if [[ ! -f "$CERTIFICATE" ]]; then
+    echo "ERROR: Certificate file does not exist:"
+    echo "$CERTIFICATE"
+    exit 1
+fi
+
+# ------------------------------------------
+# Check required commands
+# ------------------------------------------
+
+if ! command -v openssl >/dev/null 2>&1; then
+    echo "ERROR: OpenSSL is not installed."
+    exit 1
+fi
+
+# ------------------------------------------
+# Read certificate expiry date
+# ------------------------------------------
+
+EXPIRY_DATE=$(openssl x509 \
+    -in "$CERTIFICATE" \
+    -noout \
+    -enddate | cut -d= -f2)
+
+# ------------------------------------------
+# Convert expiry date to Unix timestamp
+# ------------------------------------------
+
+EXPIRY_TIMESTAMP=$(date -d "$EXPIRY_DATE" +%s)
+
+CURRENT_TIMESTAMP=$(date +%s)
+
+# ------------------------------------------
+# Calculate remaining time
+# ------------------------------------------
+
+REMAINING_SECONDS=$((EXPIRY_TIMESTAMP - CURRENT_TIMESTAMP))
+
+REMAINING_DAYS=$((REMAINING_SECONDS / 86400))
+
+# ------------------------------------------
+# Determine certificate status
+# ------------------------------------------
+
+if (( REMAINING_SECONDS <= 0 )); then
+
+    STATUS="EXPIRED"
+
+elif (( REMAINING_DAYS <= CRITICAL_DAYS )); then
+
+    STATUS="CRITICAL"
+
+elif (( REMAINING_DAYS <= WARNING_DAYS )); then
+
+    STATUS="WARNING"
+
+else
+
+    STATUS="HEALTHY"
+
+fi
+
+
+# ------------------------------------------
+# Determine whether renewal is required
+# ------------------------------------------
+
+RENEWAL_REQUIRED=false
+
+if (( REMAINING_DAYS <= RENEWAL_DAYS )); then
+    RENEWAL_REQUIRED=true
+fi
+
+# ------------------------------------------
+# Prepare monitoring output
+# ------------------------------------------
+
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+OUTPUT="
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : $TIMESTAMP
+Domain          : $DOMAIN
+Certificate     : $CERTIFICATE
+
+Expiry Date     : $EXPIRY_DATE
+Days Remaining  : $REMAINING_DAYS
+
+Warning Threshold  : $WARNING_DAYS days
+Critical Threshold : $CRITICAL_DAYS days
+
+Status          : $STATUS
+Renewal Required: $RENEWAL_REQUIRED
+
+==========================================
+"
+
+# ------------------------------------------
+# Display result
+# ------------------------------------------
+
+echo "$OUTPUT"
+
+# ------------------------------------------
+# Write result to log
+# ------------------------------------------
+
+echo "$OUTPUT" >> "$LOG_FILE"
+
+# ------------------------------------------
+# Renewal function
+# ------------------------------------------
+
+renew_certificate() {
+
+    echo ""
+    echo "Renewal check started..."
+
+    # --------------------------------------
+    # No renewal required
+    # --------------------------------------
+
+    if [[ "$RENEWAL_REQUIRED" != "true" ]]; then
+        echo "Certificate does not require renewal."
+        return 0
+    fi
+
+    echo "Certificate is within the renewal window."
+    echo "Starting Certbot renewal..."
+
+    # --------------------------------------
+    # Run Certbot renewal
+    # --------------------------------------
+
+    if ! certbot renew; then
+
+        echo "ERROR: Certbot renewal failed."
+        echo "Nginx will NOT be reloaded."
+
+        return 1
+
+    fi
+
+    echo "Certbot renewal completed successfully."
+
+    # --------------------------------------
+    # Validate Nginx configuration
+    # --------------------------------------
+
+    echo "Testing Nginx configuration..."
+
+    if ! nginx -t; then
+
+        echo "ERROR: Nginx configuration test failed."
+        echo "Nginx will NOT be reloaded."
+
+        return 1
+
+    fi
+
+    echo "Nginx configuration is valid."
+
+    # --------------------------------------
+    # Reload Nginx
+    # --------------------------------------
+
+    echo "Reloading Nginx..."
+
+    if ! systemctl reload nginx; then
+
+        echo "ERROR: Nginx reload failed."
+
+        return 1
+
+    fi
+
+    echo "Nginx reloaded successfully."
+
+    # --------------------------------------
+    # Verify live HTTPS certificate
+    # --------------------------------------
+
+    echo "Verifying live HTTPS certificate..."
+
+    LIVE_EXPIRY_DATE=$(echo | openssl s_client \
+        -connect "${DOMAIN}:443" \
+        -servername "${DOMAIN}" 2>/dev/null \
+        | openssl x509 -noout -enddate \
+        | cut -d= -f2)
+
+    if [[ -z "$LIVE_EXPIRY_DATE" ]]; then
+
+        echo "ERROR: Unable to retrieve live HTTPS certificate."
+
+        return 1
+
+    fi
+
+    echo "Live certificate expiry: $LIVE_EXPIRY_DATE"
+
+    # --------------------------------------
+    # Verify live certificate domain
+    # --------------------------------------
+
+    LIVE_SUBJECT=$(echo | openssl s_client \
+        -connect "${DOMAIN}:443" \
+        -servername "${DOMAIN}" 2>/dev/null \
+        | openssl x509 -noout -subject)
+
+    echo "Live certificate: $LIVE_SUBJECT"
+
+    echo "Live HTTPS certificate verified successfully."
+
+}
+
+# ------------------------------------------
+# Execute renewal check
+# ------------------------------------------
+
+renew_certificate
+
+# ------------------------------------------
+# Return monitoring status
+# ------------------------------------------
+
+case "$STATUS" in
+
+    HEALTHY)
+        exit 0
+        ;;
+
+    WARNING)
+        exit 1
+        ;;
+
+    CRITICAL)
+        exit 2
+        ;;
+
+    EXPIRED)
+        exit 3
+        ;;
+
+    *)
+        exit 4
+        ;;
+
+esac
+
+
+

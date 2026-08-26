@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSL Renewal Simulation</title>
+
+<style>
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f5f7fa;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #18212f;
+}
+
+.container {
+    max-width: 680px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #e1e6eb;
+}
+
+.header {
+    background: #18212f;
+    color: #ffffff;
+    padding: 28px 34px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.content {
+    padding: 40px 34px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #eef2f7;
+    color: #425466;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.title {
+    font-size: 30px;
+    margin: 22px 0 12px;
+}
+
+.description {
+    color: #667085;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.simulation-box {
+    margin-top: 28px;
+    padding: 24px;
+    background: #f5f7fa;
+    border: 1px solid #dfe5eb;
+    border-radius: 14px;
+}
+
+.simulation-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.simulation-text {
+    color: #667085;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.steps {
+    margin-top: 26px;
+}
+
+.step {
+    padding: 17px 20px;
+    border: 1px solid #e2e7ec;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.check {
+    color: #12804a;
+    font-weight: 700;
+}
+
+.notice {
+    margin-top: 24px;
+    padding: 18px 20px;
+    background: #fff8e8;
+    border: 1px solid #f0dca8;
+    border-radius: 12px;
+    color: #765800;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer {
+    padding: 22px 34px;
+    background: #f8fafb;
+    color: #7a8491;
+    font-size: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">
+            SSL Certificate Monitor
+        </div>
+    </div>
+
+    <div class="content">
+
+        <span class="badge">
+            ● RENEWAL SIMULATION SUCCESSFUL
+        </span>
+
+        <h1 class="title">
+            Renewal simulation completed.
+        </h1>
+
+        <p class="description">
+            The SSL renewal workflow for
+            <strong>{{DOMAIN}}</strong>
+            was successfully simulated using Certbot.
+        </p>
+
+        <div class="simulation-box">
+
+            <div class="simulation-title">
+                What this means
+            </div>
+
+            <div class="simulation-text">
+                Certbot successfully verified that the certificate
+                can be renewed. This was a dry-run only and no
+                production certificate was replaced or renewed.
+            </div>
+
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+                <span class="check">✓</span>
+                Certbot renewal simulation completed
+            </div>
+
+            <div class="step">
+                <span class="check">✓</span>
+                Renewal configuration validated
+            </div>
+
+            <div class="step">
+                <span class="check">✓</span>
+                Nginx configuration validated
+            </div>
+
+            <div class="step">
+                <span class="check">✓</span>
+                Live HTTPS certificate verified
+            </div>
+
+        </div>
+
+        <div class="notice">
+
+            <strong>DEMO MODE</strong><br>
+
+            No real SSL certificate was renewed during this
+            demonstration.
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Automated SSL certificate monitoring notification.
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:18:02
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 89
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : HEALTHY
+Renewal Required: false
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : SSL Certificate Healthy - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate does not require renewal.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:19:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 89
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : HEALTHY
+Renewal Required: false
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : SSL Certificate Healthy - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate does not require renewal.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:20:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Processing /etc/letsencrypt/renewal/kumardevops.online.conf
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Simulating renewal of an existing certificate for kumardevops.online
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Congratulations, all simulated renewals succeeded: 
+  /etc/letsencrypt/live/kumardevops.online/fullchain.pem (success)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Certbot renewal dry-run completed successfully.
+Testing Nginx configuration...
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+Nginx configuration is valid.
+Reloading Nginx...
+Nginx reloaded successfully.
+
+Verifying live HTTPS certificate...
+Live certificate expiry: Nov 22 07:03:17 2026 GMT
+Live certificate: subject=CN=kumardevops.online
+Live HTTPS certificate verified successfully.
+Renewal workflow completed successfully.
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : SSL Renewal Simulation Successful - kumardevops.online
+Email sent successfully.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:21:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Processing /etc/letsencrypt/renewal/kumardevops.online.conf
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:22:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Another instance of Certbot is already running.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /tmp/certbot-log-oahdpmnt/log or re-run Certbot with -v for more details.
+ERROR: Certbot renewal dry-run failed.
+Nginx will NOT be reloaded.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:23:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Another instance of Certbot is already running.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /tmp/certbot-log-90_bnnil/log or re-run Certbot with -v for more details.
+ERROR: Certbot renewal dry-run failed.
+Nginx will NOT be reloaded.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:24:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Another instance of Certbot is already running.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /tmp/certbot-log-bpbuj6x2/log or re-run Certbot with -v for more details.
+ERROR: Certbot renewal dry-run failed.
+Nginx will NOT be reloaded.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:25:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Another instance of Certbot is already running.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /tmp/certbot-log-b6zw15jc/log or re-run Certbot with -v for more details.
+ERROR: Certbot renewal dry-run failed.
+Nginx will NOT be reloaded.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:26:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Another instance of Certbot is already running.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /tmp/certbot-log-j3_pbj5b/log or re-run Certbot with -v for more details.
+ERROR: Certbot renewal dry-run failed.
+Nginx will NOT be reloaded.
+DEMO MODE: Simulating certificate expiry.
+
+==========================================
+       SSL CERTIFICATE MONITOR
+==========================================
+
+Timestamp       : 2026-08-24 11:27:01
+Domain          : kumardevops.online
+Certificate     : /etc/letsencrypt/live/kumardevops.online/fullchain.pem
+
+Expiry Date     : Nov 22 07:03:17 2026 GMT
+Days Remaining  : 6
+
+Warning Threshold  : 30 days
+Critical Threshold : 7 days
+Renewal Threshold  : 30 days
+
+Status          : CRITICAL
+Renewal Required: true
+
+==========================================
+
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : URGENT: SSL Certificate Critical - kumardevops.online
+Email sent successfully.
+
+Renewal check started...
+Certificate is within the renewal window.
+DEMO MODE: Running Certbot renewal dry-run.
+No real certificate renewal will be performed.
+Another instance of Certbot is already running.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /tmp/certbot-log-zyoq_35c/log or re-run Certbot with -v for more details.
+ERROR: Certbot renewal dry-run failed.
+Nginx will NOT be reloaded.
+Simulating renewal of an existing certificate for kumardevops.online
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Congratulations, all simulated renewals succeeded: 
+  /etc/letsencrypt/live/kumardevops.online/fullchain.pem (success)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Certbot renewal dry-run completed successfully.
+Testing Nginx configuration...
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+Nginx configuration is valid.
+Reloading Nginx...
+Nginx reloaded successfully.
+
+Verifying live HTTPS certificate...
+Live certificate expiry: Nov 22 07:03:17 2026 GMT
+Live certificate: subject=CN=kumardevops.online
+Live HTTPS certificate verified successfully.
+Renewal workflow completed successfully.
+Sending email:
+  From    : SSL Certificate Monitor <kd.codegeek@gmail.com>
+  To      : kd.codegeek@gmail.com
+  Subject : SSL Renewal Simulation Successful - kumardevops.online
+Email sent successfully.

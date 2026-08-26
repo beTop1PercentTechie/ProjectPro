@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSL Renewal Successful</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #f4f7f6;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #18212f;
+}
+
+.container {
+    max-width: 680px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #dfe8e3;
+}
+
+.header {
+    background: #18212f;
+    color: #ffffff;
+    padding: 28px 34px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.content {
+    padding: 40px 34px;
+}
+
+.success {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #e8f7ef;
+    color: #12804a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.title {
+    font-size: 30px;
+    margin: 22px 0 12px;
+}
+
+.description {
+    color: #667085;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.steps {
+    margin-top: 28px;
+}
+
+.step {
+    padding: 17px 20px;
+    border: 1px solid #e5ebe7;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.check {
+    color: #12804a;
+    font-weight: 700;
+}
+
+.footer {
+    padding: 22px 34px;
+    background: #f8faf9;
+    color: #7a8491;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">SSL Certificate Monitor</div>
+    </div>
+
+    <div class="content">
+
+        <span class="success">
+            ● RENEWAL SUCCESSFUL
+        </span>
+
+        <h1 class="title">
+            Certificate renewal completed.
+        </h1>
+
+        <p class="description">
+            The SSL renewal workflow for
+            <strong>{{DOMAIN}}</strong>
+            completed successfully.
+        </p>
+
+        <div class="steps">
+
+            <div class="step">
+                <span class="check">✓</span>
+                Certificate renewal completed
+            </div>
+
+            <div class="step">
+                <span class="check">✓</span>
+                Nginx configuration validated
+            </div>
+
+            <div class="step">
+                <span class="check">✓</span>
+                Nginx reloaded successfully
+            </div>
+
+            <div class="step">
+                <span class="check">✓</span>
+                Live HTTPS certificate verified
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Automated SSL certificate renewal notification.
+    </div>
+
+</div>
+
+</body>
+</html>
