@@ -1,0 +1,15 @@
+# Generated at runtime - not part of the source tree
+backups/*
+logs/*
+reports/*
+restore-test/*
+.rsync-staging/
+.backup.lock/
+!backups/.gitkeep
+!logs/.gitkeep
+!reports/.gitkeep
+
+# Editor/OS cruft
+*.swp
+.DS_Store
+Thumbs.db
