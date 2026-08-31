@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Enterprise Linux Server Management Platform
+    </title>
+
+
+    <!-- ======================================================
+         GOOGLE FONTS & UI STYLES
+    ======================================================= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================================
+         TOP HEADER
+    ======================================================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            Enterprise Linux Server Management Platform
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            Linux Server Online
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ======================================================
+         MAIN APPLICATION LAYOUT
+    ======================================================= -->
+
+    <div class="layout">
+
+
+        <!-- ==================================================
+             LEFT SIDEBAR
+        =================================================== -->
+
+        <aside class="sidebar">
+
+
+            <div class="section-title">
+                Management
+            </div>
+
+
+            <!-- Dashboard -->
+
+            <button
+                class="menu-item active"
+                data-page="dashboard"
+            >
+                Dashboard
+            </button>
+
+
+
+            <!-- ==================================================
+                 SYSTEM HEALTH
+            =================================================== -->
+
+            <button
+                class="menu-item"
+                id="health-toggle"
+            >
+                System Health
+            </button>
+
+
+            <div
+                id="health-menu"
+                class="submenu"
+            >
+
+                <button
+                    data-page="cpu"
+                >
+                    CPU Usage
+                </button>
+
+
+                <button
+                    data-page="development"
+                    data-feature="Memory Usage"
+                >
+                    Memory Usage
+                </button>
+
+
+                <button
+                    data-page="development"
+                    data-feature="Disk Usage"
+                >
+                    Disk Usage
+                </button>
+
+
+                <button
+                    data-page="development"
+                    data-feature="Load Average"
+                >
+                    Load Average
+                </button>
+
+
+                <button
+                    data-page="development"
+                    data-feature="Uptime"
+                >
+                    Uptime
+                </button>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 OTHER MANAGEMENT MODULES
+            =================================================== -->
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Users & Groups"
+            >
+                Users & Groups
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Service Management"
+            >
+                Services
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Process Manager"
+            >
+                Processes
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Storage & Filesystem"
+            >
+                Storage
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Log Analyzer"
+            >
+                Logs
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Security Audit"
+            >
+                Security
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Backup Manager"
+            >
+                Backups
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-page="development"
+                data-feature="Report Generator"
+            >
+                Reports
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- ==================================================
+             MAIN CONTENT AREA
+
+             JavaScript dynamically places pages here.
+        =================================================== -->
+
+        <main
+            id="content"
+            class="content"
+        ></main>
+
+
+    </div>
+
+
+
+    <!-- ======================================================
+         DASHBOARD TEMPLATE
+
+         JavaScript clones this template when the user
+         selects Dashboard.
+    ======================================================= -->
+
+    <template id="template-dashboard">
+
+
+        <h1 class="page-title">
+            Dashboard
+        </h1>
+
+
+        <p class="page-description">
+            Enterprise Linux server administration and
+            monitoring platform.
+        </p>
+
+
+
+        <!-- ==================================================
+             OVERVIEW STRIP
+        =================================================== -->
+
+        <div class="overview-grid">
+
+            <div class="overview-tile">
+                <span class="overview-label">Platform Status</span>
+                <span class="overview-value overview-value-emerald">Operational</span>
+            </div>
+
+            <div class="overview-tile">
+                <span class="overview-label">Live Modules</span>
+                <span class="overview-value">1 <span class="overview-value-sub">/ 9</span></span>
+            </div>
+
+            <div class="overview-tile">
+                <span class="overview-label">Monitoring</span>
+                <span class="overview-value overview-value-emerald">Real-time</span>
+            </div>
+
+            <div class="overview-tile">
+                <span class="overview-label">Environment</span>
+                <span class="overview-value">Linux Server</span>
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             MONITORING
+        =================================================== -->
+
+        <div class="section-heading">
+            <span>Monitoring</span>
+            <span class="section-heading-line"></span>
+        </div>
+
+        <div class="cards">
+
+            <!-- System Health -->
+
+            <div
+                class="card card-live"
+                data-page="cpu"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-emerald">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-live">Live</span>
+                </div>
+
+                <h3>
+                    System Health
+                </h3>
+
+                <p>
+                    Monitor CPU, memory, disk,
+                    load and uptime.
+                </p>
+
+                <span class="card-arrow">
+                    View module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             ADMINISTRATION
+        =================================================== -->
+
+        <div class="section-heading">
+            <span>Administration</span>
+            <span class="section-heading-line"></span>
+        </div>
+
+        <div class="cards">
+
+            <!-- Users -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Users & Groups"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-teal">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Users & Groups
+                </h3>
+
+                <p>
+                    Manage Linux users, groups
+                    and sudo privileges.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+            <!-- Services -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Service Management"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-teal">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Services
+                </h3>
+
+                <p>
+                    Start, stop and restart
+                    Linux services.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+            <!-- Processes -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Process Manager"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-teal">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <rect x="9" y="9" width="6" height="6"/>
+                            <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Processes
+                </h3>
+
+                <p>
+                    Monitor and manage
+                    Linux processes.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             OPERATIONS & SECURITY
+        =================================================== -->
+
+        <div class="section-heading">
+            <span>Operations &amp; Security</span>
+            <span class="section-heading-line"></span>
+        </div>
+
+        <div class="cards">
+
+            <!-- Storage -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Storage & Filesystem"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-amber">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="8" ry="3"/>
+                            <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/>
+                            <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Storage
+                </h3>
+
+                <p>
+                    Monitor filesystems
+                    and disk usage.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+            <!-- Logs -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Log Analyzer"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-amber">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6M9 13h6M9 17h6M9 9h1"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Logs
+                </h3>
+
+                <p>
+                    Analyze Linux system
+                    and authentication logs.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+            <!-- Security -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Security Audit"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-rose">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Security
+                </h3>
+
+                <p>
+                    Audit firewall, SSH
+                    and security settings.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+            <!-- Backups -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Backup Manager"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-amber">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>
+                            <path d="M12 12v9M9 18l3 3 3-3"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Backups
+                </h3>
+
+                <p>
+                    Create, restore and
+                    manage backups.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+            <!-- Reports -->
+
+            <div
+                class="card"
+                data-page="development"
+                data-feature="Report Generator"
+            >
+
+                <div class="card-top">
+                    <span class="card-icon icon-emerald">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"/>
+                            <path d="M18 17V9M13 17V5M8 17v-4"/>
+                        </svg>
+                    </span>
+                    <span class="card-badge badge-dev">In development</span>
+                </div>
+
+                <h3>
+                    Reports
+                </h3>
+
+                <p>
+                    Generate enterprise
+                    server reports.
+                </p>
+
+                <span class="card-arrow">
+                    Open module
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </template>
+
+
+
+    <!-- ======================================================
+         CPU MONITORING TEMPLATE
+    ======================================================= -->
+
+    <template id="template-cpu">
+
+
+        <!-- Page heading -->
+
+        <h1 class="page-title">
+            CPU Usage
+        </h1>
+
+
+        <p class="page-description">
+            Real-time CPU utilization collected from
+            the Linux server.
+        </p>
+
+
+
+        <!-- ==================================================
+             TIME RANGE / REFRESH CONTROLS
+        =================================================== -->
+
+        <div class="cpu-controls-bar">
+
+            <div class="control-group">
+
+                <span class="control-label" id="time-range-label-id">
+                    Time Range
+                </span>
+
+                <div
+                    class="dropdown"
+                    data-role="time-range-dropdown"
+                >
+
+                    <button
+                        type="button"
+                        class="dropdown-trigger"
+                        data-role="time-range-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-labelledby="time-range-label-id"
+                    >
+                        <span data-role="time-range-trigger-label">Live</span>
+
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+
+                    <div
+                        class="dropdown-menu"
+                        data-role="time-range-menu"
+                        role="listbox"
+                        aria-label="Time range"
+                        hidden
+                    >
+
+                        <button type="button" class="dropdown-option" data-range="live" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Live</span>
+                            <span class="dropdown-badge">5 sec</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-range="1h" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Last 1 Hour</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-range="5h" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Last 5 Hours</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-range="12h" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Last 12 Hours</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-range="custom" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Custom</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="control-group">
+
+                <span class="control-label" id="date-range-label-id">
+                    Date Range
+                </span>
+
+                <div
+                    class="dropdown"
+                    data-role="date-range-dropdown"
+                >
+
+                    <button
+                        type="button"
+                        class="dropdown-trigger"
+                        data-role="date-range-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-labelledby="date-range-label-id"
+                    >
+                        <span data-role="date-range-trigger-label">Live</span>
+
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+
+                    <div
+                        class="dropdown-menu"
+                        data-role="date-range-menu"
+                        role="listbox"
+                        aria-label="Date range"
+                        hidden
+                    >
+
+                        <button type="button" class="dropdown-option" data-date-range="1d" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Last 1 Day</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-date-range="3d" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Last 3 Days</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-date-range="5d" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Last 5 Days</span>
+                        </button>
+
+                        <button type="button" class="dropdown-option" data-date-range="custom-date" role="option">
+                            <span class="dropdown-check">✓</span>
+                            <span class="dropdown-option-label">Custom</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="control-group">
+
+                <label class="control-label" for="refresh-interval-select">
+                    Refresh Interval
+                </label>
+
+                <select
+                    id="refresh-interval-select"
+                    class="control-select"
+                    data-role="refresh-interval-select"
+                >
+                    <option value="1000">1 sec</option>
+                    <option value="5000" selected>5 sec</option>
+                    <option value="10000">10 sec</option>
+                    <option value="30000">30 sec</option>
+                    <option value="60000">1 min</option>
+                </select>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="live-toggle-btn"
+                data-role="live-pause-btn"
+                aria-pressed="false"
+            >
+                <svg data-role="live-pause-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                    <rect x="6" y="5" width="4" height="14" rx="1"/>
+                    <rect x="14" y="5" width="4" height="14" rx="1"/>
+                </svg>
+                <span data-role="live-pause-label">Pause Live</span>
+            </button>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             APPLIED RANGE SUMMARY
+        =================================================== -->
+
+        <div class="range-summary-bar" data-role="range-summary-bar" hidden>
+
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+
+            <span data-role="range-summary-text">Live</span>
+
+            <span class="range-summary-duration" data-role="range-summary-duration"></span>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CUSTOM TIME RANGE MODAL
+        =================================================== -->
+
+        <div
+            class="custom-range-overlay"
+            data-role="custom-range-overlay"
+            hidden
+        >
+
+            <div
+                class="custom-range-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="custom-range-title"
+            >
+
+                <h3 id="custom-range-title">
+                    Custom Time Range
+                </h3>
+
+                <p class="custom-range-hint">
+                    Enter times for today using 12-hour format.
+                </p>
+
+                <div class="custom-range-fields">
+
+                    <label class="custom-range-field">
+                        From
+                        <input
+                            type="text"
+                            class="custom-range-input"
+                            data-role="custom-from-input"
+                            placeholder="08:30 AM"
+                            autocomplete="off"
+                        >
+                    </label>
+
+                    <label class="custom-range-field">
+                        To
+                        <input
+                            type="text"
+                            class="custom-range-input"
+                            data-role="custom-to-input"
+                            placeholder="11:45 AM"
+                            autocomplete="off"
+                        >
+                    </label>
+
+                </div>
+
+                <p
+                    class="custom-range-error"
+                    data-role="custom-range-error"
+                    hidden
+                ></p>
+
+                <div class="custom-range-actions">
+
+                    <button type="button" class="btn-secondary" data-role="custom-range-cancel">
+                        Cancel
+                    </button>
+
+                    <button type="button" class="btn-primary" data-role="custom-range-apply">
+                        Apply
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CUSTOM DATE + TIME RANGE MODAL
+        =================================================== -->
+
+        <div
+            class="dt-range-overlay"
+            data-role="dt-range-overlay"
+            hidden
+        >
+
+            <div
+                class="dt-range-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="dt-range-title"
+            >
+
+                <h3 id="dt-range-title">
+                    Custom Date &amp; Time Range
+                </h3>
+
+                <p class="custom-range-hint">
+                    Pick a start and end date, then set the exact time for each.
+                </p>
+
+                <div class="dt-range-columns">
+
+                    <!-- FROM -->
+
+                    <div class="dt-range-column">
+
+                        <span class="dt-range-column-label">From</span>
+
+                        <div class="dt-calendar" data-role="dt-calendar-from">
+
+                            <div class="dt-calendar-header">
+
+                                <button type="button" class="dt-cal-nav" data-role="dt-cal-prev-from" aria-label="Previous month">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                </button>
+
+                                <span class="dt-cal-month-label" data-role="dt-cal-label-from"></span>
+
+                                <button type="button" class="dt-cal-nav" data-role="dt-cal-next-from" aria-label="Next month">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                </button>
+
+                            </div>
+
+                            <div class="dt-calendar-weekdays">
+                                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                            </div>
+
+                            <div class="dt-calendar-grid" data-role="dt-cal-grid-from" role="grid" aria-label="Start date"></div>
+
+                        </div>
+
+                        <label class="custom-range-field dt-time-field">
+                            Time
+                            <input
+                                type="text"
+                                class="custom-range-input"
+                                data-role="dt-from-time"
+                                placeholder="08:30 AM"
+                                autocomplete="off"
+                            >
+                        </label>
+
+                    </div>
+
+
+                    <!-- TO -->
+
+                    <div class="dt-range-column">
+
+                        <span class="dt-range-column-label">To</span>
+
+                        <div class="dt-calendar" data-role="dt-calendar-to">
+
+                            <div class="dt-calendar-header">
+
+                                <button type="button" class="dt-cal-nav" data-role="dt-cal-prev-to" aria-label="Previous month">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                </button>
+
+                                <span class="dt-cal-month-label" data-role="dt-cal-label-to"></span>
+
+                                <button type="button" class="dt-cal-nav" data-role="dt-cal-next-to" aria-label="Next month">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                </button>
+
+                            </div>
+
+                            <div class="dt-calendar-weekdays">
+                                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                            </div>
+
+                            <div class="dt-calendar-grid" data-role="dt-cal-grid-to" role="grid" aria-label="End date"></div>
+
+                        </div>
+
+                        <label class="custom-range-field dt-time-field">
+                            Time
+                            <input
+                                type="text"
+                                class="custom-range-input"
+                                data-role="dt-to-time"
+                                placeholder="11:00 AM"
+                                autocomplete="off"
+                            >
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <p
+                    class="custom-range-error"
+                    data-role="dt-range-error"
+                    hidden
+                ></p>
+
+                <div class="custom-range-actions">
+
+                    <button type="button" class="btn-secondary" data-role="dt-range-cancel">
+                        Cancel
+                    </button>
+
+                    <button type="button" class="btn-primary" data-role="dt-range-apply">
+                        Apply
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CPU MAIN CARD
+        =================================================== -->
+
+        <div class="health-card">
+
+
+            <!-- ==================================================
+                 CURRENT CPU SECTION
+            =================================================== -->
+
+            <div class="cpu-top">
+
+
+                <div>
+
+                    <h2 data-role="cpu-value-label">
+                        Current CPU Utilization
+                    </h2>
+
+
+                    <div
+                        class="cpu-value"
+                        data-role="cpu-value"
+                    >
+                        Loading...
+                    </div>
+
+                </div>
+
+
+
+                <!-- Dynamic CPU status -->
+
+                <div
+                    class="cpu-status status-normal"
+                    data-role="cpu-status"
+                >
+                    Normal
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 GRAPH HEADER
+            =================================================== -->
+
+            <div class="chart-header">
+
+
+                <div class="chart-title">
+
+                    CPU Utilization History
+
+                </div>
+
+
+                <div class="chart-subtitle" data-role="chart-resolution-label">
+
+                    Live monitoring •
+                    5 second interval
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 CPU GRAPH
+
+                 The chart always shows a fixed-size
+                 window of CHART_WINDOW_SIZE readings.
+                 Use the slider below to scroll back
+                 through every reading collected so far.
+            =================================================== -->
+
+            <div class="cpu-chart-container">
+
+
+                <canvas
+                    data-role="cpu-chart"
+                ></canvas>
+
+
+                <div
+                    class="chart-empty-state"
+                    data-role="chart-empty-state"
+                    hidden
+                >
+                    No CPU readings available for the selected time range.
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 STOCK-STYLE CHART RANGE SCROLLBAR
+            =================================================== -->
+
+            <div class="stock-scrollbar-wrapper">
+
+                <button
+                    type="button"
+                    class="stock-scrollbar-arrow arrow-left"
+                    data-role="scroll-left-btn"
+                    aria-label="Scroll Left"
+                >
+                    <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor">
+                        <polygon points="16,4 6,12 16,20"/>
+                    </svg>
+                </button>
+
+                <div
+                    class="stock-scrollbar-track"
+                    data-role="stock-scrollbar-track"
+                >
+                    <div
+                        class="stock-scrollbar-thumb"
+                        data-role="stock-scrollbar-thumb"
+                    ></div>
+                </div>
+
+                <button
+                    type="button"
+                    class="stock-scrollbar-arrow arrow-right"
+                    data-role="scroll-right-btn"
+                    aria-label="Scroll Right"
+                >
+                    <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor">
+                        <polygon points="8,4 18,12 8,20"/>
+                    </svg>
+                </button>
+
+            </div>
+
+
+            <!-- ==================================================
+                 CHART LEGEND (MATCHING SCREENSHOT)
+            =================================================== -->
+
+            <div class="chart-legend-container">
+
+                <div class="legend-item">
+                    <span class="legend-circle cpu-circle"></span>
+                    <span class="legend-label">CPU Utilization</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-circle warning-circle"></span>
+                    <span class="legend-label">Warning 50%</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-circle critical-circle"></span>
+                    <span class="legend-label">Critical 80%</span>
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 READINGS & LIVE STATUS FOOTER CARD
+            =================================================== -->
+
+            <div class="chart-footer-status-box">
+
+                <div class="footer-reading-info">
+                    <span class="radio-indicator">
+                        <span class="radio-dot"></span>
+                    </span>
+                    <span
+                        class="footer-range-text"
+                        data-role="cpu-scrubber-range"
+                    >
+                        Loading readings...
+                    </span>
+                </div>
+
+                <button
+                    type="button"
+                    class="live-status-pill is-live"
+                    data-role="cpu-live-btn"
+                >
+                    <span class="live-status-dot"></span>
+                    Live
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CPU STATISTICS
+        =================================================== -->
+
+        <div class="cpu-info-row">
+
+
+            <!-- Current -->
+
+            <div class="cpu-stat">
+
+                <span class="cpu-stat-label">
+
+                    Current
+
+                </span>
+
+
+                <span
+                    class="cpu-stat-value"
+                    data-role="current-cpu"
+                >
+
+                    0.0%
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Average -->
+
+            <div class="cpu-stat">
+
+                <span class="cpu-stat-label">
+
+                    Average
+
+                </span>
+
+
+                <span
+                    class="cpu-stat-value"
+                    data-role="average-cpu"
+                >
+
+                    0.0%
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Peak -->
+
+            <div class="cpu-stat">
+
+                <span class="cpu-stat-label">
+
+                    Peak
+
+                </span>
+
+
+                <span class="cpu-stat-value"
+                    data-role="peak-cpu"
+                >
+
+                    0.0%
+
+                </span>
+
+                <span class="cpu-stat-timestamp" data-role="peak-cpu-time"></span>
+
+            </div>
+
+
+
+            <!-- Minimum -->
+
+            <div class="cpu-stat">
+
+                <span class="cpu-stat-label">
+
+                    Minimum
+
+                </span>
+
+
+                <span class="cpu-stat-value"
+                    data-role="minimum-cpu"
+                >
+
+                    0.0%
+
+                </span>
+
+                <span class="cpu-stat-timestamp" data-role="minimum-cpu-time"></span>
+
+            </div>
+
+
+
+            <!-- Number of readings -->
+
+            <div class="cpu-stat">
+
+                <span class="cpu-stat-label">
+
+                    Readings
+
+                </span>
+
+
+                <span
+                    class="cpu-stat-value"
+                    data-role="reading-count"
+                >
+
+                    0
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </template>
+
+
+
+    <!-- ======================================================
+         DEVELOPMENT / PLACEHOLDER TEMPLATE
+    ======================================================= -->
+
+    <template id="template-development">
+
+
+        <div class="development">
+
+
+            <h2
+                data-role="feature-name"
+            ></h2>
+
+
+            <p>
+                This feature is currently
+                under development.
+            </p>
+
+
+            <br>
+
+
+            <p>
+                The corresponding Linux functionality
+                will be implemented in a future module.
+            </p>
+
+
+        </div>
+
+
+    </template>
+
+
+
+    <!-- ======================================================
+         CHART.JS
+
+         This library is used ONLY for displaying the
+         CPU monitoring graph.
+
+         It must load BEFORE script.js.
+    ======================================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+
+
+    <!-- ======================================================
+         OUR APPLICATION JAVASCRIPT
+
+         This handles navigation, API calls,
+         CPU history and graph updates.
+    ======================================================= -->
+
+    <script
+        src="/static/script.js"
+    ></script>
+
+
+</body>
+
+</html>
